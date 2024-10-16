@@ -30,7 +30,7 @@ function Cartaz() {
             <h2 className="text-3xl text-center my-5">Filmes em cartaz</h2>
             <div>
                 <div className="h-[70vh] w-full bg-cover bg-center" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280${bgCartaz})`}} alt="" >
-                    <Link to={`/movies/${filme.id}`}>Ver mais</Link>
+                    {/* <Link to={`/movies/${filme.id}`}>Ver mais</Link> */}
                 </div>
                 <div className="flex gap-5 ml-5 mt-[-10rem] overflow-scroll overflow-y-hidden scroll">
                     {cartaz.map(filme => (
