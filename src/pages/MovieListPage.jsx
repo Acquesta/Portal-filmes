@@ -8,7 +8,7 @@ export default function MovieListPage() {
 
     useEffect(() => {
         
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br')
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
         .then(results => results.json())
         .then(data => setFilmes(data.results))
         .catch(error => console.log(error))

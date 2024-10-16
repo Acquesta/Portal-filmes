@@ -1,7 +1,7 @@
-export default function CardContainer({ titulo, children }) {
+export default function CardContainer({ title, children }) {
     return (
         <div>
-            <h1>{titulo}</h1>
+            <h1>{title}</h1>
             <div className="flex">
                 {children}
             </div>
