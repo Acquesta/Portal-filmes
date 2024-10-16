@@ -5,3 +5,8 @@
 .active{
   border-bottom: 2px solid white;
 }
+
+.scroll{
+  scrollbar-width: thin;        
+  scrollbar-color: #fff transparent;  
+}
