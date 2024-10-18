@@ -5,10 +5,11 @@ export default function MovieListPage() {
 
     const [search, setSearch] = useState("")
     const [filmes, setFilmes] = useState([])
+    const [filmesFiltrados, setFilmesFiltrados] = useState([])
 
     useEffect(() => {
         
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
+        fetch('https://api.themoviedb.org/3/discover/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br&sort_by=popularity.desc')
         .then(results => results.json())
         .then(data => setFilmes(data.results))
         .catch(error => console.log(error))
@@ -19,10 +20,13 @@ export default function MovieListPage() {
 
     const handleSearch = (event) => {
         setSearch(event.target.value)
-        console.log(search)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt&query=${event.target.value}`)
+        .then(results => results.json())
+        .then(data => setFilmesFiltrados(data.results))
+        .catch(error => console.log(error))
+        .finally(() => console.log("Acabou"))
+        // https://api.themoviedb.org/3/search/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt&query=te
     }
-
-    const filmesFiltrados = filmes.filter(filme => filme.title.toLowerCase().includes(search.toLowerCase()))
 
     return (
         <>
@@ -34,7 +38,7 @@ export default function MovieListPage() {
                 value={search}
                 onChange={handleSearch}
             />  
-            <section className="flex">
+            <section className="flex flex-wrap gap-10 justify-center w-[90vw] mx-auto">
                 {
                     filmesFiltrados.length > 0 ?
 
@@ -43,7 +47,14 @@ export default function MovieListPage() {
                                 <MovieCard key={filme.id} {...filme} />
                             ))
                         :
-                        <p> Filme não encontrado</p>
+                        filmes.length > 0 ?
+                            filmes
+                            .map(filme => (
+                                <MovieCard key={filme.id} {...filme} />
+                            ))
+                    :  <p>Não há filmes para exibir</p>
+
+
                 }
             </section>
         </>
