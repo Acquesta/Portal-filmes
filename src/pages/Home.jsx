@@ -8,7 +8,11 @@ export default function Home() {
     const [populares, setPopulares] = useState([])
     const [topRated, setTopTopRated] = useState([])
     const [upcoming, setUpcoming] = useState([])
+    const [recomendados, setRecomendados] = useState([])
 
+    const assistidos = JSON.parse(localStorage.getItem("assistidos"))
+
+    console.log(assistidos);
 
     useEffect(() => {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
@@ -28,9 +32,17 @@ export default function Home() {
         .then(data => setUpcoming(data.results))
         .catch(error => console.log(error))
         .finally(() => console.log("Fechou"))
+
+        fetch(`https://api.themoviedb.org/3/movie/${assistidos[0].id}/recommendations?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`)
+        .then(results => results.json())
+        .then(data => setRecomendados(data.results))
+        .catch(error => console.log(error))
+        .finally(() => console.log("Fechou"))
+        
     }, [])
 
 
+    console.log(recomendados);
 
     return (
         <>
@@ -58,6 +70,15 @@ export default function Home() {
                 {
                     
                     upcoming.map(filme => (
+                        <MovieCard key={filme.id} {...filme} />
+                    ))
+                }
+            </CardContainer>
+            
+            <CardContainer titulo="Recomendados">
+                {
+                    
+                    recomendados.map(filme => (
                         <MovieCard key={filme.id} {...filme} />
                     ))
                 }

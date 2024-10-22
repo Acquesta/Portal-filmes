@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function MovieCard({ id, title, poster_path }) {
+export default function MovieCard({ id, title = 'Teste', poster_path }) {
 
     
     const diminuiTitulo = (title, maxLetra) => {
