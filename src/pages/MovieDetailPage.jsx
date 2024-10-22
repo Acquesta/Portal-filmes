@@ -58,6 +58,40 @@ export default function MovieDetailPage() {
         );
     };
 
+    const pegaLocalStore = () => {
+        let verDepois = localStorage.getItem('verDepois');
+        let assistidos = localStorage.getItem('assistidos');
+        if (assistidos && verDepois) {
+            assistidos = JSON.parse(localStore);
+            verDepois = JSON.parse(verDepois);
+            return [assistidos, verDepois];
+        }
+    }
+
+    const verifica = (id, tag) => {
+        let filmes = pegaLocalStore()
+        if(filmes){
+            filmes[tag].forEach((filme) => {
+                if (filme.id == id) {
+                    return true
+                } 
+                return false
+            })
+        }
+    }
+
+    const verDepois = (id) => {
+        if(!verifica(id, 1)){
+            localStorage.setItem('verDepois', JSON.stringify(filme))
+        }
+        else if(verifica(id, 0)){
+            alert('Você já assistiu esse filme')
+        }
+        else{
+            localStorage.setItem('verDepois', JSON.stringify([...filmeImagens.filter((filme) => filme)]))
+        }
+    }
+
     return (
         <>
             <div className="h-[80vh] bg-cover bg-center" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path})` }}></div>
@@ -82,6 +116,10 @@ export default function MovieDetailPage() {
                             <h4 className="text-center text-xl ">Data</h4>
                             <h3 className="mt-3 py-4 text-xl">{filme.release_date}</h3>
                         </div>
+                    </div>
+                    <div className="flex gap-10 font-bold">
+                        <button onClick={() => verDepois(filme.id)} className="border-2 border-yellow-500 px-5 py-3 rounded-2xl hover:bg-yellow-500 hover:text-black">Ver depois</button>
+                        <button className="border-2 border-green-500 px-5 py-3 rounded-2xl hover:bg-green-500 hover:text-black">Ja assisti</button>
                     </div>
                 </div>
             </div>
