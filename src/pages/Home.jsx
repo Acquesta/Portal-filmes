@@ -16,29 +16,32 @@ export default function Home() {
 
     useEffect(() => {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
-        .then(results => results.json())
-        .then(data => setPopulares(data.results))
-        .catch(error => console.log(error))
-        .finally(() => console.log("Fechou"))
-        
-        fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
-        .then(results => results.json())
-        .then(data => setTopTopRated(data.results))
-        .catch(error => console.log(error))
-        .finally(() => console.log("Fechou"))
-        
-        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
-        .then(results => results.json())
-        .then(data => setUpcoming(data.results))
-        .catch(error => console.log(error))
-        .finally(() => console.log("Fechou"))
+            .then(results => results.json())
+            .then(data => setPopulares(data.results))
+            .catch(error => console.log(error))
+            .finally(() => console.log("Fechou"))
 
-        fetch(`https://api.themoviedb.org/3/movie/${assistidos[0].id}/recommendations?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`)
-        .then(results => results.json())
-        .then(data => setRecomendados(data.results))
-        .catch(error => console.log(error))
-        .finally(() => console.log("Fechou"))
-        
+        fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
+            .then(results => results.json())
+            .then(data => setTopTopRated(data.results))
+            .catch(error => console.log(error))
+            .finally(() => console.log("Fechou"))
+
+        fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br')
+            .then(results => results.json())
+            .then(data => setUpcoming(data.results))
+            .catch(error => console.log(error))
+            .finally(() => console.log("Fechou"))
+
+        if (assistidos) {
+            fetch(`https://api.themoviedb.org/3/movie/${assistidos[0].id}/recommendations?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`)
+                .then(results => results.json())
+                .then(data => setRecomendados(data.results))
+                .catch(error => console.log(error))
+                .finally(() => console.log("Fechou"))
+        }
+
+
     }, [])
 
 
@@ -46,11 +49,11 @@ export default function Home() {
 
     return (
         <>
-            <Cartaz />
+            <Cartaz/>
 
             <CardContainer titulo="Filmes populares">
                 {
-                    
+
                     populares.map(filme => (
                         <MovieCard key={filme.id} {...filme} />
                     ))
@@ -59,30 +62,33 @@ export default function Home() {
 
             <CardContainer titulo="Filmes bem classificados">
                 {
-                    
+
                     topRated.map(filme => (
                         <MovieCard key={filme.id} {...filme} />
                     ))
                 }
             </CardContainer>
 
+                {
+                    assistidos && <CardContainer titulo="Recomendados">
+                        {
+    
+                            recomendados.map(filme => (
+                                <MovieCard key={filme.id} {...filme} />
+                            ))
+                        }
+                    </CardContainer>
+                }
+
             <CardContainer titulo="Em breve">
                 {
-                    
+
                     upcoming.map(filme => (
                         <MovieCard key={filme.id} {...filme} />
                     ))
                 }
             </CardContainer>
-            
-            <CardContainer titulo="Recomendados">
-                {
-                    
-                    recomendados.map(filme => (
-                        <MovieCard key={filme.id} {...filme} />
-                    ))
-                }
-            </CardContainer>
+
         </>
     )
 }

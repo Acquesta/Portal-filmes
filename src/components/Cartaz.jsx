@@ -29,7 +29,7 @@ function Cartaz() {
             <div>
                 <div className="flex flex-col justify-center pl-10 h-[70vh] w-full bg-cover bg-center" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280${focoCartaz.backdrop_path})`}} alt="" >
                     <h2 className="text-5xl">{focoCartaz.title}</h2>
-                    <Link to={`/movies/${focoCartaz.id}`} className="w-[10vw] my-5 px-3 py-1 border-2 border-white rounded-xl">Ver mais</Link>
+                    <Link to={`/movies/${focoCartaz.id}`} className="w-[10vw] my-5 px-3 py-1 border-2 border-white rounded-xl text-center">Ver mais</Link>
                 </div>
                 <div className="flex gap-5 ml-5 mt-[-10rem] overflow-scroll overflow-y-hidden scroll">
                     {cartaz.map(filme => (
