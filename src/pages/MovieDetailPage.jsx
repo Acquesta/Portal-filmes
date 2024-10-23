@@ -2,50 +2,70 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MostraFilme from "../components/MostraFilme";
 
+import { lineWobble } from 'ldrs'
+
 export default function MovieDetailPage() {
   const { id } = useParams();
 
   const [filme, setFilme] = useState([]);
   const [filmeImagens, setFilmeImagens] = useState([]);
   const [filmeVideos, setFilmeVideos] = useState([]);
+  const [creditos, setCreditos] = useState([])
 
   const [sectionMostraFilmes, setSectionMostraFilmes] = useState(0);
 
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`
-    )
-      .then((results) => results.json())
-      .then((data) => {
-        setFilme(data);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Acabou"));
+    setTimeout(() => {
+      fetch(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`
+      )
+        .then((results) => results.json())
+        .then((data) => {
+          setFilme(data);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => console.log("Acabou"));
+  
+      fetch(
+        `https://api.themoviedb.org/3/movie/${id}/images?api_key=be713c0f3820693d5b8eb83566bbe6cc`
+      )
+        .then((results) => results.json())
+        .then((data) => {
+          setFilmeImagens(
+            data.backdrops.filter((imagem) => imagem.iso_639_1 == null)
+          );
+          // setFilmeImagens(data.backdrops)
+        })
+        .catch((error) => console.log(error))
+        .finally(() => console.log("Acabou"));
+  
+      fetch(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`
+      )
+        .then((results) => results.json())
+        .then((data) => {
+          console.log(data.results);
+  
+          setFilmeVideos(data.results);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => console.log("Acabou"));
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=be713c0f3820693d5b8eb83566bbe6cc`
-    )
-      .then((results) => results.json())
-      .then((data) => {
-        setFilmeImagens(
-          data.backdrops.filter((imagem) => imagem.iso_639_1 == null)
-        );
-        // setFilmeImagens(data.backdrops)
-      })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Acabou"));
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`
-    )
-      .then((results) => results.json())
-      .then((data) => {
-        console.log(data.results);
-
-        setFilmeVideos(data.results);
-      })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Acabou"));
+      fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`
+      )
+        .then((results) => results.json())
+        .then((data) => {
+          console.log(data.results);
+  
+          setCreditos(data.cast);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => console.log("Acabou"));
+        setLoading(false)
+    }, 1000)
   }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,6 +127,22 @@ export default function MovieDetailPage() {
           setEstaNaListaAssistidos(true);
       }
   };
+
+  lineWobble.register()
+
+  if (loading){
+    return(
+      <div className="h-[100vh] flex justify-center items-center">
+          <l-line-wobble
+              size="80"
+              stroke="5"
+              bg-opacity="0.1"
+              speed="1.75" 
+              color="white" 
+          ></l-line-wobble>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -205,6 +241,25 @@ export default function MovieDetailPage() {
         filmeVideos={filmeVideos}
         type={sectionMostraFilmes}
       />
+      <div>
+        <h3 className="text-2xl text-center my-5">Atores</h3>
+        <div className="flex gap-3 mb-10 mx-8 overflow-scroll overflow-y-hidden scroll">
+          {
+            creditos.map(pessoa => (
+              
+              pessoa.profile_path && (
+                <div className="min-w-[10vw] text-center">
+                  <img className="rounded-xl" src={`https://image.tmdb.org/t/p/w500${pessoa.profile_path}`} alt="sem da pessoa 😥" />
+                  <h2 className="mt-2">{pessoa.name}</h2>
+                  <div className="h-1 bg-gray-900 my-2 mx-2"></div>
+                  <h2>{pessoa.character}</h2>
+                </div>
+              )
+              
+            ))
+          }
+        </div>
+      </div>
     </>
   );
 }

@@ -19,13 +19,15 @@ function MostraFilme({ nextImage, prevImage, filmeImagens, filmeVideos, currentI
                         )
                             :
                             (
-                                <iframe
-                                    className="h-[70vh] w-[80vw]"
-                                    src={`https://www.youtube.com/embed/${filmeVideos[currentIndex]?.key}`}
-                                    title="YouTube Video"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
+                                
+                                filmeVideos[currentIndex] ?  
+                                    <iframe
+                                        className="h-[70vh] w-[80vw]"
+                                        src={`https://www.youtube.com/embed/${filmeVideos[currentIndex]?.key}`}
+                                        title="YouTube Video"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe> : ''
                             )
                     }
                 </div>

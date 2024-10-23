@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import CardContainer from "../components/CardContainer";
-import MovieCard from "../components/MovieCard";
+import { NavLink } from "react-router-dom";
 
 export default function GenreListPage() {
 
@@ -14,38 +13,18 @@ export default function GenreListPage() {
       .finally(() => console.log("Acabou"))
   }, [])
 
-  const [listaGen, setListaGen] = useState([])
-
-  const pegaFilmes = async (idGenero, nomeGenero) => {
-    await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&with_genres=${idGenero}&language=pt-BR`)
-      .then(results => results.json())
-      .then(data => {
-        // let res = data.results
-        setListaGen(data.results)
-      })
-      .catch(error => console.log(error))
-
-      return listaGen
-  }
-
-  console.log(pegaFilmes(28, 'ação'));
-
-
+  
 
   return (
     <>
-      <h1 className="text-center font-bold text-3xl my-10" >Página dos generos</h1>
-      <button onClick={() => pegaFilmes(28, 'ação')}>Busca genero</button>
-
-      <ul className="mx-10">
+      <h1 className="text-center font-bold text-3xl my-10" >Todos os gêneros</h1>
+      <div className="flex flex-wrap justify-between gap-2 mx-10">
         {
           generos.map(genero => (
-            <CardContainer key={genero.id}>
-              
-            </CardContainer>
+            <NavLink to={`/genre/${genero.id}`} className="w-[30vw] bg-teal-700 my-1 px-5 py-7 rounded-2xl cursor-pointer hover:bg-teal-500 transition-colors">{genero.name}</NavLink>
           ))
         }
-      </ul>
+      </div>
 
     </>
   )
