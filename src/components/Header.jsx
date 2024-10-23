@@ -22,7 +22,6 @@ export default function Header() {
                         <li><NavLink to="/movies">Filmes</NavLink></li>
                         <li><NavLink to="/genre">Gêneros</NavLink></li>
                         {isLogged && <li><NavLink to="/minhaLista">Minha lista</NavLink></li>}
-                        {isLogged && <li><NavLink to="/settings">Configurações</NavLink></li>}
                     </ul>
                 </nav>
                 <Login isLogged={isLogged} handleLogin={handleLogin} />

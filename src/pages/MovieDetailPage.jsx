@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import MostraFilme from "../components/MostraFilme";
 
 import { lineWobble } from 'ldrs'
@@ -161,12 +161,13 @@ export default function MovieDetailPage() {
             <h2 className=" text-4xl">{filme.title}</h2>
             <div className="flex gap-5 mt-4">
               {filme.genres?.map((genero) => (
-                <h2
+                <NavLink
+                  to={`/genre/${genero.id}`}
                   key={`${genero.name}`}
-                  className="border-2 border-purple-800 rounded-lg text-purple-300 px-3 py-[.2rem]"
+                  className="border-2 border-purple-800 rounded-lg text-purple-300 px-3 py-[.2rem] hover:bg-purple-800 cursor-pointer"
                 >
                   {genero.name}
-                </h2>
+                </NavLink>
               ))}
             </div>
           </div>
@@ -240,8 +241,12 @@ export default function MovieDetailPage() {
         type={sectionMostraFilmes}
       />
       <div>
-        <h3 className="text-2xl text-center my-5">Atores</h3>
-        <div className="flex gap-3 mb-10 mx-8 overflow-scroll overflow-y-hidden scroll">
+        <h3 className="text-2xl text-center my-5">
+          {
+            creditos ? "Este filme não possui atores" : "Atores"
+          }
+        </h3>
+        <div className="flex gap-3 mb-10 mx-8 overflow-scroll overflow-y-hidden">
           {
             creditos.map(pessoa => (
               
@@ -252,7 +257,7 @@ export default function MovieDetailPage() {
                   <div className="h-1 bg-gray-900 my-2 mx-2"></div>
                   <h2>{pessoa.character}</h2>
                 </div>
-              )
+              ) 
               
             ))
           }
