@@ -58,8 +58,6 @@ export default function MovieDetailPage() {
       )
         .then((results) => results.json())
         .then((data) => {
-          console.log(data.results);
-  
           setCreditos(data.cast);
         })
         .catch((error) => console.log(error))
@@ -248,7 +246,7 @@ export default function MovieDetailPage() {
             creditos.map(pessoa => (
               
               pessoa.profile_path && (
-                <div className="min-w-[10vw] text-center">
+                <div key={pessoa.name} className="min-w-[10vw] text-center">
                   <img className="rounded-xl" src={`https://image.tmdb.org/t/p/w500${pessoa.profile_path}`} alt="sem da pessoa 😥" />
                   <h2 className="mt-2">{pessoa.name}</h2>
                   <div className="h-1 bg-gray-900 my-2 mx-2"></div>

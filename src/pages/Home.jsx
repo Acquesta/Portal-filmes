@@ -38,13 +38,16 @@ export default function Home() {
                 .catch(error => console.log(error))
                 .finally(() => console.log("Fechou"))
     
-            assistidos[0] && (
+            // console.log(assistidos[0]);
+
+            if (assistidos){
+                console.log(assistidos);
                 fetch(`https://api.themoviedb.org/3/movie/${assistidos[0].id}/recommendations?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br`)
                     .then(results => results.json())
                     .then(data => setRecomendados(data.results))
                     .catch(error => console.log(error))
                     .finally(() => console.log("Fechou"))
-            )
+            } 
             setLoading(false)
         }, 1000)
 
