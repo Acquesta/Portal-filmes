@@ -243,7 +243,7 @@ export default function MovieDetailPage() {
       <div>
         <h3 className="text-2xl text-center my-5">
           {
-            creditos ? "Este filme não possui atores" : "Atores"
+            !creditos[0] ? "Este filme não possui atores" : "Atores"
           }
         </h3>
         <div className="flex gap-3 mb-10 mx-8 overflow-scroll overflow-y-hidden">
