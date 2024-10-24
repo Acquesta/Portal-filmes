@@ -13,11 +13,11 @@ function PaginasMenu({ pages, paginas, passaPagina }) {
             <button>
                 <ArrowLongLeftIcon className="h-5 w-5 text-white mx-auto" />
             </button>
-            <ul className="w-full flex justify-between items-center mx-10 my-10">
+            <ul className="w-full flex justify-between items-center mx-5 my-10">
                 {
                     todasPaginas.map(page => (
                         page <= 10 + pages ? 
-                        <li onClick={() => passaPagina(page)} key={page} className={`flex items-center justify-center w-10 h-10 ${page == pages && 'bg-gray-600'} rounded-full text-center cursor-pointer`}>
+                        <li onClick={() => passaPagina(page)} key={page} className={`flex items-center justify-center w-5 h-5 ${page == pages && 'bg-gray-600'} rounded-full text-center cursor-pointer`}>
                             <p>
                                 {page}
                             </p>

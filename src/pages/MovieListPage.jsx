@@ -67,10 +67,10 @@ export default function MovieListPage() {
     }else{
         return(
             <>
-                <div className="w-1/3 flex flex-col justify-center mx-auto my-10 gap-10">
+                <div className="flex flex-col justify-center mx-10 my-10 gap-10 md:1/3">
                     <h2 className="text-center font-bold text-3xl">Veja o catálogo completo de filmes</h2>
                     <input
-                        className="text-black py-3 rounded-xl pl-3"
+                        className="text-black py-3 rounded-xl pl-3 md:w-1/3 md:mx-auto"
                         type="text"
                         id="search"
                         value={search}

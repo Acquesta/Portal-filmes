@@ -13,8 +13,8 @@ export default function MovieCard({ id, title = 'Teste', poster_path }) {
     return (
         <>
             <Link className="my-3 rounded-xl text-black font-bold" to={`/movies/${id}`}>
-                <div className="cursor-pointer">
-                    <img className="min-w-[50vw] hover:scale-105 transition-all rounded-xl md:min-w-[10vw]" src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="imagem não encontrada"/>
+                <div className="cursor-pointer ">
+                    <img className="md:w-[10vw] min-w-[20vw] hover:scale-105 transition-all rounded-xl" src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="imagem não encontrada"/>
                     {/* <p className="text-xs md:text-lg w-[15vw]">{diminuiTitulo(title, 20)}</p> */}
                     {
                         /* 
