@@ -14,7 +14,7 @@ export default function Header() {
         <>
             <header className="bg-teal-700 flex text-white justify-between px-10 h-14 items-center">
                 <div>
-                    <h1 className="font-bold">Portal Filmes</h1>
+                    <h1 className="font-bold text-sm md:text-xl">Portal Filmes</h1>
                 </div>
                 <nav>
                     <ul className="flex gap-4">
