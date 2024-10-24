@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import MovieCard from "../components/MovieCard"
 
 import { lineWobble } from 'ldrs'
+import PaginasMenu from "../components/PaginasMenu"
 
 export default function MovieListPage() {
 
@@ -11,19 +12,27 @@ export default function MovieListPage() {
 
     const [loading, setLoading] = useState(true)
 
+    const [page, setPage] = useState(1)
+    const [listaPage, setListaPage] = useState([])
+
     useEffect(() => {
         setLoading(true)
         setTimeout(() => {
-            fetch('https://api.themoviedb.org/3/discover/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br&sort_by=popularity.desc')
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt-br&sort_by=popularity.desc&page=${page}`)
             .then(results => results.json())
-            .then(data => setFilmes(data.results))
+            .then(data => {
+                setListaPage({
+                    comeco: data.page,
+                    final: data.total_pages
+                })
+                setFilmes(data.results)
+            })
             .catch(error => console.log(error))
             .finally(() => console.log("Acabou"))
             setLoading(false)
         }, 1000)
 
-    }, [])
-
+    }, [page])
 
 
     const handleSearch = (event) => {
@@ -34,6 +43,11 @@ export default function MovieListPage() {
         .catch(error => console.log(error))
         .finally(() => console.log("Acabou"))
         // https://api.themoviedb.org/3/search/movie?api_key=be713c0f3820693d5b8eb83566bbe6cc&language=pt&query=te
+    }
+
+    const passaPagina = (pag = page + 1) => {
+        console.log(page);
+        setPage(pag)
     }
 
     lineWobble.register()
@@ -83,6 +97,11 @@ export default function MovieListPage() {
 
                     }
                 </section>
+                <PaginasMenu 
+                    pages={page}
+                    paginas={listaPage}
+                    passaPagina={passaPagina}    
+                />
             </>
         )
     }
