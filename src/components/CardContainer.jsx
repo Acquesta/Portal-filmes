@@ -35,7 +35,7 @@ export default function CardContainer({ titulo, children }) {
 
             <div ref={scrollContainerRef} className="max-w-[100vw] flex mt-10 mx-auto px-10 gap-2 overflow-scroll overflow-y-hidden">
                 {
-                    children[0] ? children : <h4 className="text-xl">Você não tem nehum filme {titulo} 😥, adicione filmes a lista <Link className="underline" to='/movies'>Procurar filmes</Link></h4>
+                    children[0] ? children : <h4 className="text-xl">Você não tem nenhum filme {titulo} 😥, adicione filmes a lista <Link className="underline" to='/movies'>Procurar filmes</Link></h4>
                 }
             </div>
         </div>
