@@ -159,7 +159,7 @@ export default function MovieDetailPage() {
         <div className="flex flex-col justify-evenly mt-5 px-10">
           <div>
             <h2 className=" text-4xl">{filme.title}</h2>
-            <div className="flex gap-5 mt-4">
+            <div className="flex flex-wrap gap-5 mt-4">
               {filme.genres?.map((genero) => (
                 <NavLink
                   to={`/genre/${genero.id}`}
