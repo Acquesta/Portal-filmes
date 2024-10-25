@@ -19,34 +19,34 @@ function Cartaz() {
     }, [])
 
     const trocaCartaz = (cartazFoco) => {
-        console.log(cartazFoco);
         setFocoCartaz(cartazFoco)
+        setScroll(cartaz.indexOf(cartazFoco))
     }
 
     const scrollRef = useRef(null)
     const [scroll, setScroll] = useState(0)
 
     useEffect(() => {
+        // trocaCartaz(cartaz[scroll])
         setTimeout(() => {
-            console.log(scroll);
             if(scroll >= cartaz.length - 1){
                 scrollRef.current.scrollBy({ left: -100000, behavior: 'smooth' });
-                setScroll(1)
+                setScroll(0)
             }else{
                 scrollRef.current.scrollBy({ left: 100, behavior: 'smooth' });
                 setScroll(scroll + 1)
             }
         }, 5000)
-        setFocoCartaz(cartaz[scroll])
+        trocaCartaz(cartaz[scroll])
     }, [scroll])
 
     return ( 
         <div>
             <h2 className="text-3xl text-center my-5">Filmes em cartaz</h2>
             <div>
-                <div className="flex flex-col justify-center pl-10 h-[50vw] w-full bg-cover bg-center" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280${focoCartaz?.backdrop_path})`}} alt="" >
-                    <h2 className="text-xl sm:text-5xl">{focoCartaz?.title}</h2>
-                    <Link to={`/movies/${focoCartaz?.id}`} className="w-[25vw] my-5 px-3 py-1 border-2 border-white rounded-xl text-center text-sm">Ver mais</Link>
+                <div className="flex flex-col justify-center pl-10 h-[50vw] w-full bg-cover bg-center" style={{backgroundImage:`url(https://image.tmdb.org/t/p/w1280${cartaz[scroll]?.backdrop_path})`}} alt="" >
+                    <h2 className="text-xl sm:text-5xl">{cartaz[scroll]?.title}</h2>
+                    <Link to={`/movies/${cartaz[scroll]?.id}`} className="w-[25vw] my-5 px-3 py-1 border-2 border-white rounded-xl text-center text-sm">Ver mais</Link>
                 </div>
                 <div ref={scrollRef} className="flex gap-5 px-5 mt-[-10vw] overflow-scroll overflow-y-hidden">
                     {cartaz.map(filme => (
