@@ -9,11 +9,11 @@ function PaginasMenu({ pages, paginas, passaPagina }) {
     }
 
     return ( 
-        <div className="flex justify-between items-center w-2/3 mx-auto">
+        <div className="flex justify-between items-center w-full mx-auto">
             <button>
                 <ArrowLongLeftIcon className="h-5 w-5 text-white mx-auto" />
             </button>
-            <ul className="w-full flex justify-between items-center mx-5 my-10">
+            <ul className="w-full flex justify-between items-center my-10">
                 {
                     todasPaginas.map(page => (
                         page <= 10 + pages ? 
