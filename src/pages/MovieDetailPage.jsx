@@ -150,7 +150,7 @@ export default function MovieDetailPage() {
           backgroundImage: `url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path})`,
         }}
       ></div>
-      <div className="flex px-10 py-5">
+      <div className="flex md:px-10 py-5">
         <img
           className="hidden md:block h-[30vw] rounded-xl"
           src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
@@ -172,7 +172,7 @@ export default function MovieDetailPage() {
             </div>
           </div>
           <p className="my-3 text-justify text font">{filme.overview}</p>
-          <div className="w-1/2 flex gap-10">
+          <div className="md:w-1/2 flex justify-around gap-10">
             <div>
               <h4 className="text-center text-xl">Nota</h4>
               <button
@@ -192,7 +192,7 @@ export default function MovieDetailPage() {
               <h3 className="mt-3 py-4 text-xl">{filme.release_date}</h3>
             </div>
           </div>
-          <div className="flex mt-5 gap-10 font-bold">
+          <div className="flex justify-center md:justify-start mt-5 gap-10 font-bold">
             <button
               onClick={() => verDepois()}
               className="border-2 border-yellow-500 px-5 py-3 rounded-2xl hover:bg-yellow-500 hover:text-black"
@@ -256,7 +256,7 @@ export default function MovieDetailPage() {
             creditos.map(pessoa => (
               
               pessoa.profile_path && (
-                <div key={pessoa.name} className="min-w-[10vw] text-center">
+                <div key={pessoa.name} className="min-w-[25vw] md:min-w-[10vw] text-center">
                   <img className="rounded-xl" src={`https://image.tmdb.org/t/p/w500${pessoa.profile_path}`} alt="sem da pessoa 😥" />
                   <h2 className="mt-2">{pessoa.name}</h2>
                   <div className="h-1 bg-gray-900 my-2 mx-2"></div>
