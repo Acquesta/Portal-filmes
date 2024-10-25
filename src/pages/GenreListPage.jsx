@@ -18,10 +18,10 @@ export default function GenreListPage() {
   return (
     <>
       <h1 className="text-center font-bold text-3xl my-10" >Todos os gêneros</h1>
-      <div className="flex flex-wrap justify-between gap-2 mx-10">
+      <div className="flex flex-wrap justify-around gap-2 mx-10">
         {
           generos.map(genero => (
-            <NavLink to={`/genre/${genero.id}`} className="w-[30vw] bg-teal-700 my-1 px-5 py-7 rounded-2xl cursor-pointer hover:bg-teal-500 transition-colors">{genero.name}</NavLink>
+            <NavLink to={`/genre/${genero.id}`} className="w-full md:w-[25vw] bg-teal-700 my-1 px-5 py-7 rounded-2xl cursor-pointer hover:bg-teal-500 transition-colors">{genero.name}</NavLink>
           ))
         }
       </div>

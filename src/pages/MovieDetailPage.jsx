@@ -68,15 +68,15 @@ export default function MovieDetailPage() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextImage = () => {
+  const nextImage = (tipo) => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === filmeImagens.length - 1 ? 0 : prevIndex + 1
+      prevIndex === tipo.length - 1 ? 0 : prevIndex + 1
     );
   };
 
-  const prevImage = () => {
+  const prevImage = (tipo) => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? filmeImagens.length - 1 : prevIndex - 1
+      prevIndex === 0 ? tipo.length - 1 : prevIndex - 1
     );
   };
 
@@ -145,14 +145,14 @@ export default function MovieDetailPage() {
   return (
     <>
       <div
-        className="h-[80vh] bg-cover bg-center"
+        className="w-full h-[30vh] md:h-[80vh] bg-cover bg-center"
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/w1280${filme.backdrop_path})`,
         }}
       ></div>
       <div className="flex px-10 py-5">
         <img
-          className="h-[30vw] rounded-xl"
+          className="hidden md:block h-[30vw] rounded-xl"
           src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
           alt=""
         />
@@ -220,16 +220,21 @@ export default function MovieDetailPage() {
         >
           Imagens
         </h2>
-        <h2
-          onClick={() =>
-            sectionMostraFilmes == 0 ? setSectionMostraFilmes(1) : ""
-          }
-          className={`text-2xl text-center my-5 cursor-pointer ${
-            sectionMostraFilmes == 1 ? "underline" : ""
-          }`}
-        >
-          Vídeos
-        </h2>
+        {
+          filmeVideos[currentIndex] ?   
+            <h2
+              onClick={() =>
+                sectionMostraFilmes == 0 ? setSectionMostraFilmes(1) : ""
+              }
+              className={`text-2xl text-center my-5 cursor-pointer ${
+                sectionMostraFilmes == 1 ? "underline" : ""
+              }`}
+            >
+              Vídeos
+            </h2>
+          : ''
+        }
+      
       </div>
       <MostraFilme
         key={filmeImagens}
