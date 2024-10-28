@@ -20,24 +20,11 @@ function Cartaz() {
 
     const trocaCartaz = (cartazFoco) => {
         setFocoCartaz(cartazFoco)
-        // setScroll(cartaz.indexOf(cartazFoco))
+        setScroll(cartaz.indexOf(cartazFoco))
     }
 
     const scrollRef = useRef(null)
     const [scroll, setScroll] = useState(0)
-
-    useEffect(() => {
-        setTimeout(() => {
-            if(scroll >= cartaz.length - 1){
-                scrollRef.current.scrollBy({ left: -100000, behavior: 'smooth' });
-                setScroll(0)
-            }else{
-                scrollRef.current.scrollBy({ left: 100, behavior: 'smooth' });
-                setScroll(scroll + 1)
-            }
-        }, 5000)
-        trocaCartaz(cartaz[scroll])
-    }, [scroll])
 
     return ( 
         <div>

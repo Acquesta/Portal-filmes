@@ -220,20 +220,18 @@ export default function MovieDetailPage() {
         >
           Imagens
         </h2>
-        {
-          filmeVideos[currentIndex] ?   
-            <h2
-              onClick={() =>
-                sectionMostraFilmes == 0 ? setSectionMostraFilmes(1) : ""
-              }
-              className={`text-2xl text-center my-5 cursor-pointer ${
-                sectionMostraFilmes == 1 ? "underline" : ""
-              }`}
-            >
-              Vídeos
-            </h2>
-          : ''
-        }
+  
+        <h2
+          onClick={() =>
+            sectionMostraFilmes == 0 ? setSectionMostraFilmes(1) : ""
+          }
+          className={`text-2xl text-center my-5 cursor-pointer ${
+            sectionMostraFilmes == 1 ? "underline" : ""
+          }`}
+        >
+          {filmeVideos[0] ? 'Vídeos' : ''}         
+        </h2>
+         
       
       </div>
       <MostraFilme

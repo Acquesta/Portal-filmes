@@ -1,11 +1,15 @@
 function MostraFilme({ nextImage, prevImage, filmeImagens, filmeVideos, currentIndex, type }) {
 
-    console.log( filmeVideos[currentIndex]);
+    console.log(filmeVideos);
+
     return (
 
         <>
 
             <div className="flex justify-center items-center my-7 md:px-20 md:gap-10">
+                {
+                    !filmeVideos
+                }
                 <button className="border-2 border-white md:p-3 rounded-full hover:bg-slate-600 transition-all " onClick={() => {type == 0 ? prevImage(filmeImagens) : prevImage(filmeVideos)}}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -29,7 +33,7 @@ function MostraFilme({ nextImage, prevImage, filmeImagens, filmeVideos, currentI
                                         title="YouTube Video"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
-                                    ></iframe> : ''
+                                    ></iframe> : <h2 className="text-2xl">Esse trailer não está disponível</h2>
                             )
                     }
                 </div>
