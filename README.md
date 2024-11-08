@@ -1,3 +1,5 @@
+![Imagem do site](ImagemPag.png)
+
 # Movie Watchlist 🎬
 
 Este é um projeto em React que utiliza a API The Movie Database (TMDb) para exibir informações sobre filmes, além de permitir ao usuário salvar filmes assistidos e filmes para ver depois, utilizando armazenamento local.
