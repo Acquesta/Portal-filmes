@@ -1,4 +1,4 @@
-![Imagem do site](ImagemPag.png)
+![Imagem do site](ImagemPag2.png)
 
 # Movie Watchlist 🎬
 
